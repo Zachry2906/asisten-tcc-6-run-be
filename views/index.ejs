@@ -1,48 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h3>Selamat datang di Praktikum TCC pertemuan 5</h3>
-    <div>Daftar Endpoint API:</div>
-    <table border="1">
-      <thead>
-        <tr>
-          <td>Metode</td>
-          <td>Endpoint</td>
-          <td>Deskripsi</td>
-        </tr>
-      </thead>
-      <tbody style="font-family: monospace">
-        <tr>
-          <td>GET</td>
-          <td>/users</td>
-          <td>Mengambil seluruh data dari tabel users.</td>
-        </tr>
-        <tr>
-          <td>GET</td>
-          <td>/users/:id</td>
-          <td>Mengambil data dari tabel users berdasarkan id.</td>
-        </tr>
-        <tr>
-          <td>POST</td>
-          <td>/add-user</td>
-          <td>Menambahkan data baru ke tabel users.</td>
-        </tr>
-        <tr>
-          <td>PUT</td>
-          <td>/edit-user/:id</td>
-          <td>Mengubah data dari tabel users berdasarkan id.</td>
-        </tr>
-        <tr>
-          <td>DELETE</td>
-          <td>/delete-user/:id</td>
-          <td>Menghapus data dari tabel users berdasarkan id.</td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praktikum TCC - Pertemuan 5</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      margin-bottom: 1rem;
+    }
+    
+    .api-section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .section-title {
+      font-size: 1.4rem;
+      color: #444;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title:before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 24px;
+      background: #2575fc;
+      margin-right: 12px;
+      border-radius: 4px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+    
+    thead {
+      background-color: #f1f5f9;
+    }
+    
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border: none;
+    }
+    
+    th {
+      font-weight: 600;
+      color: #333;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+    
+    tbody tr {
+      border-bottom: 1px solid #eee;
+    }
+    
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+    
+    tbody tr:hover {
+      background-color: #f9fafc;
+    }
+    
+    .method {
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      display: inline-block;
+      min-width: 70px;
+      text-align: center;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    
+    .get {
+      background-color: #e3f2fd;
+      color: #0277bd;
+    }
+    
+    .post {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    
+    .put {
+      background-color: #fff8e1;
+      color: #ff8f00;
+    }
+    
+    .delete {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    
+    .endpoint {
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 600;
+      background-color: #f5f5f5;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+    
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      header {
+        padding: 1.5rem 1rem;
+      }
+      
+      .api-section {
+        padding: 1.5rem;
+      }
+      
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Praktikum TCC</h1>
+      <div class="subtitle">Pertemuan 5 - REST API Documentation</div>
+    </header>
+    
+    <div class="api-section">
+      <div class="section-title">Daftar Endpoint API</div>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Metode</th>
+            <th>Endpoint</th>
+            <th>Deskripsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td><span class="endpoint">/users</span></td>
+            <td>Mengambil seluruh data dari tabel users.</td>
+          </tr>
+          <tr>
+            <td><span class="method get">GET</span></td>
+            <td><span class="endpoint">/users/:id</span></td>
+            <td>Mengambil data dari tabel users berdasarkan id.</td>
+          </tr>
+          <tr>
+            <td><span class="method post">POST</span></td>
+            <td><span class="endpoint">/add-user</span></td>
+            <td>Menambahkan data baru ke tabel users.</td>
+          </tr>
+          <tr>
+            <td><span class="method put">PUT</span></td>
+            <td><span class="endpoint">/edit-user/:id</span></td>
+            <td>Mengubah data dari tabel users berdasarkan id.</td>
+          </tr>
+          <tr>
+            <td><span class="method delete">DELETE</span></td>
+            <td><span class="endpoint">/delete-user/:id</span></td>
+            <td>Menghapus data dari tabel users berdasarkan id.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <footer>
+      &copy; 2025 Praktikum Teknologi Cloud Computing
+    </footer>
+  </div>
+</body>
 </html>
